@@ -1,0 +1,27 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeWriter"
+        xmlns:TaskItem="clr-namespace:TimeWriter.Controls.TaskItem;assembly=TimeWriter.Controls" 
+        xmlns:Time="clr-namespace:TimeWriter.Controls.Time;assembly=TimeWriter.Controls" x:Class="TimeWriter.MainWindow"
+        xmlns:prism="http://www.codeplex.com/prism"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <!--<ToolBar DockPanel.Dock="Top">
+            <Button Content="Open"/>
+            <Button Content="Save"/>
+            <Button Content="Copy"/>
+        </ToolBar>-->
+        <TabControl>
+            <TabItem Header="Write Time">
+                <Time:TimeWriter/>
+            </TabItem>
+            <TabItem Header="Add/Edit Task">
+                <TaskItem:TaskAdder/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
