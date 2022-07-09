@@ -24,13 +24,31 @@ namespace TimeWriter.Controls.Time
             set => SetProperty(ref _outputTimeTemplate, value);
         }
 
-        public List<TaskItemModel> SelectedItems 
+        public List<TaskItemModel> UserSelectedItems
         {
             get => _selectedItems;
             set
             {
                 _selectedItems = value;
+                updateSelectedItems();
             }
+        }
+
+        private void updateSelectedItems()
+        {
+            _outputTimeTemplate = String.Empty;
+            foreach (var item in UserSelectedItems)
+            {
+                _outputTimeTemplate += $"{item.Name}";
+
+                if(item.IsCompleted)
+                    _outputTimeTemplate += $" - Completed -\n";
+                else
+                    _outputTimeTemplate += $" -\n";
+
+            }
+
+            RaisePropertyChanged("OutputTimeTemplate");
         }
     }
 }

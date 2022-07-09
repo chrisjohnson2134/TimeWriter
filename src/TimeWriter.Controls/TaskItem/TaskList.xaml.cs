@@ -31,7 +31,8 @@ namespace TimeWriter.Controls.TaskItem
 
         // Using a DependencyProperty as the backing store for SelectedItems.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemsProperty =
-            DependencyProperty.Register("SelectedItems", typeof(List<TaskItemModel>), typeof(TaskList));
+            DependencyProperty.Register("SelectedItems", typeof(List<TaskItemModel>), typeof(TaskList),
+                new FrameworkPropertyMetadata(null,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
@@ -45,5 +46,6 @@ namespace TimeWriter.Controls.TaskItem
             SelectedItems = TaskListView.SelectedItems.Cast<TaskItemModel>().ToList();
 
         }
+
     }
 }
