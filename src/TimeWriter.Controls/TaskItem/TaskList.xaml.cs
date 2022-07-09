@@ -22,15 +22,16 @@ namespace TimeWriter.Controls.TaskItem
     public partial class TaskList : UserControl
     {
 
-        //public ICommand SelectedItemsChangedCommand
-        //{
-        //    get { return (ICommand)GetValue(SelectedItemsChangedCommandProperty); }
-        //    set { SetValue(SelectedItemsChangedCommandProperty, value); }
-        //}
 
-        // Using a DependencyProperty as the backing store for SelectedItemsChangedCommand.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedItemsChangedCommandProperty =
-        //    DependencyProperty.Register("SelectedItemsChangedCommand", typeof(ICommand), typeof(ownerclass), new PropertyMetadata(0));
+        public List<TaskItemModel> SelectedItems
+        {
+            get { return (List<TaskItemModel>)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedItems.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedItemsProperty =
+            DependencyProperty.Register("SelectedItems", typeof(List<TaskItemModel>), typeof(TaskList));
 
 
 
@@ -41,6 +42,7 @@ namespace TimeWriter.Controls.TaskItem
 
         private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            SelectedItems = TaskListView.SelectedItems.Cast<TaskItemModel>().ToList();
 
         }
     }

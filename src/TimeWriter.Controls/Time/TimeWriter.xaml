@@ -20,6 +20,6 @@
 
         <TextBox Grid.Column="1" Text="{Binding OutputTimeTemplate}"/>
         
-        <TaskItem:TaskList Grid.Column="0"/>
+        <TaskItem:TaskList Grid.Column="0" SelectedItems="{Binding SelectedItems}"/>
     </Grid>
 </UserControl>

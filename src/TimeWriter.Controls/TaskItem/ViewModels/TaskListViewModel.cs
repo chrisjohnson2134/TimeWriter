@@ -12,21 +12,16 @@ namespace TimeWriter.Controls.TaskItem
 {
     public class TaskListViewModel : BindableBase
     {
-        private readonly DelegateCommand<List<TaskItemModel>> _taskItemsChanged;
+        public EventHandler<List<TaskItemModel>> taskListSelectionChanged;
 
         public TaskListViewModel(ITaskItemManager taskItemManager)
         {
-            _taskItemsChanged = new DelegateCommand<List<TaskItemModel>>(s => { });
-
             TaskItems = new ObservableCollection<TaskItemModel>();
             TaskItems.AddRange(taskItemManager.TasksInProgress);
         }
 
         public ObservableCollection<TaskItemModel> TaskItems { get; set; }
 
-        //public DelegateCommand TaskItemsChanged
-        //{
-        //    get { return _taskItemsChanged; }
-        //}
+
     }
 }
