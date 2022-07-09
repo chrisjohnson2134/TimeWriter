@@ -10,24 +10,25 @@
              d:DesignHeight="450" d:DesignWidth="800" d:Background="DarkGray">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition MaxWidth="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <ComboBox Text="Select A mode..."/>
             <Label Content="Task Name :"/>
-            <TextBox/>
+            <TextBox TextWrapping="Wrap" Text="{Binding SelectedItem.Name}"/>
             <StackPanel>
                 <Label Content="Task Completed :"/>
-                <CheckBox/>
+                <CheckBox IsChecked="{Binding SelectedItem.IsCompleted}"/>
             </StackPanel>
-            <Button Content="Add Task"/>
-            <Button Content="Edit Task"/>
-            <Button Content="Remove Task"/>
+            <Button Content="Add Task" MaxWidth="150"/>
+            <Button Content="Edit Task" MaxWidth="150"/>
+            <Button Content="Remove Task" MaxWidth="150"/>
         </StackPanel>
 
-        <local:TaskList Grid.Column="1"/>
+        <local:TaskList Grid.Column="1" 
+                           SelectedItems="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl},
+                           Path=DataContext.UserSelectedItems}"/>
 
     </Grid>
 </UserControl>

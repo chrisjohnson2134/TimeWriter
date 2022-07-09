@@ -26,8 +26,8 @@ namespace TimeWriter
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IUserProfileManager, UserProfileManager>();
-            containerRegistry.Register<ITaskItemManager, TaskItemManager>();
+            containerRegistry.RegisterSingleton<IUserProfileManager, UserProfileManager>();
+            containerRegistry.RegisterSingleton<ITaskItemManager, TaskItemManager>();
         }
 
 

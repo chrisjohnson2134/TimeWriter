@@ -10,12 +10,12 @@
              d:DesignHeight="450" d:DesignWidth="500" d:Background="DarkGray">
     <Grid>
         <DockPanel LastChildFill="True">
-            <TextBox Margin="5" DockPanel.Dock="Top"/>
+            <TextBox x:Name="SearchField" Text="{Binding SearchField,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" DockPanel.Dock="Top"/>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <CheckBox Content="Show Completed" Margin="5,0,0,0"/>
+                <CheckBox x:Name="ShowCompletedCB" Content="Show Completed" IsChecked="{Binding ShowCompleted}"  Margin="5,0,0,0"/>
             </StackPanel>
 
-            <ListView x:Name="TaskListView" ItemsSource="{Binding TaskItems}" d:ItemsSource="{d:SampleData ItemCount=3}" SelectionChanged="TaskListView_SelectionChanged">
+            <ListView x:Name="TaskListView" ItemsSource="{Binding TaskItemsCollectionView}" d:ItemsSource="{d:SampleData ItemCount=3}" SelectionChanged="TaskListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
