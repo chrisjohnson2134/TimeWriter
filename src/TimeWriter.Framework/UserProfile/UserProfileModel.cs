@@ -7,7 +7,7 @@ using TimeWriter.Framework.TaskItem;
 
 namespace TimeWriter.Framework.UserProfile
 {
-    public sealed class UserProfileModel
+    public class UserProfileModel
     {
         public string UserName { get; set; }
         public List<TaskItemModel> TaskItemModels { get; set; }
