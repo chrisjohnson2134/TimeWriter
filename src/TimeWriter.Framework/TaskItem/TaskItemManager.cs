@@ -20,14 +20,20 @@ namespace TimeWriter.Framework.TaskItem
 
         public List<TaskItemModel> AllTask { get; set; }
 
+        public EventHandler<TaskItemModel> TaskItemAdded { get; set; }
+        public EventHandler<TaskItemModel> TaskItemDeleted { get; set; }
+
         public void AddTaskItem(TaskItemModel taskItemModel)
         {
             AllTask.Add(taskItemModel);
+            TaskItemAdded?.Invoke(this,taskItemModel);
         }
 
         public void RemoveTaskItem(TaskItemModel taskItemModel)
         {
             AllTask.Remove(taskItemModel);
+            TaskItemDeleted?.Invoke(this,taskItemModel);
+
         }
 
         public void SaveAll()

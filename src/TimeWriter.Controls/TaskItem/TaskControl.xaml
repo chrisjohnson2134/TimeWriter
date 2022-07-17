@@ -22,8 +22,8 @@
                 <Label Content="Task Completed :"/>
                 <CheckBox IsChecked="{Binding SelectedItem.IsCompleted}"/>
             </StackPanel>
-            <Button x:Name="AddTaskItem" Content="Add Task" IsEnabled="{Binding CanAddTask}" MaxWidth="150"/>
-            <Button x:Name="DeleteTask" Content="Remove Task" MaxWidth="150"/>
+            <Button x:Name="AddTaskItem" Content="Add Task" IsEnabled="{Binding CanAddTask}" Command="{Binding AddNewTaskCommand}" MaxWidth="150"/>
+            <Button x:Name="DeleteTask" Content="Remove Task" Command="{Binding DeleteTaskCommand}" MaxWidth="150"/>
         </StackPanel>
 
         <local:ReuseableTaskList Grid.Column="1" 

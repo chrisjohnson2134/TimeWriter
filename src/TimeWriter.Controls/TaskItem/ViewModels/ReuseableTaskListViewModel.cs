@@ -22,6 +22,9 @@ namespace TimeWriter.Controls.TaskItem
         public ReuseableTaskListViewModel(ITaskItemManager taskItemManager)
         {
             _taskItemManager = taskItemManager;
+            _taskItemManager.TaskItemAdded += taskItemManager_TaskItemAdded; 
+            _taskItemManager.TaskItemDeleted += taskItemManager_TaskItemDeleted;
+
             _searchField = String.Empty;
             TaskItems = new ObservableCollection<TaskItemModel>(_taskItemManager.AllTask);
             TaskItemsCollectionView = CollectionViewSource.GetDefaultView(TaskItems);
@@ -67,6 +70,16 @@ namespace TimeWriter.Controls.TaskItem
                     taskItem.Name.ToLower().Contains(SearchField);
             }
             return false;
+        }
+
+        private void taskItemManager_TaskItemAdded(object? sender, TaskItemModel e)
+        {
+            TaskItems.Add(e);
+        }
+
+        private void taskItemManager_TaskItemDeleted(object? sender, TaskItemModel e)
+        {
+            TaskItems.Remove(e);
         }
 
     }

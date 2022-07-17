@@ -12,13 +12,12 @@ namespace TimeWriter.Controls.TaskItem
 {
     public class TaskControlViewModel : SimplisticBase
     {
-        private List<TaskItemModel> _userSelectedItems;
         private TaskItemModel _defaultTaskItemModel = new TaskItemModel { Name = "Create or Select" };
         private ITaskItemManager _taskItemManager;
         public TaskControlViewModel(ITaskItemManager taskItemManager)
         {
             _taskItemManager = taskItemManager;
-            _userSelectedItems = new List<TaskItemModel>();
+            CanAddTask = true;
 
             SelectedItem = _defaultTaskItemModel;
 
@@ -40,12 +39,12 @@ namespace TimeWriter.Controls.TaskItem
 
         public List<TaskItemModel> UserSelectedItems
         {
-            get => _userSelectedItems;
+            get => GetPropertyValue<List<TaskItemModel>>();
             set
             {
-                _userSelectedItems = value;
-                CanAddTask = false;
+                SetPropertyValue(value);
                 SelectedItem = value.FirstOrDefault() ?? _defaultTaskItemModel;
+                CanAddTask = false;
             }
         }
 
@@ -65,16 +64,19 @@ namespace TimeWriter.Controls.TaskItem
         private void deleteTaskCommand()
         {
             _taskItemManager.RemoveTaskItem(SelectedItem);
+            SelectedItem = _defaultTaskItemModel;
         }
 
         private void addNewTaskCommandHandler()
         {
             _taskItemManager.AddTaskItem(SelectedItem);
+            SelectedItem = new TaskItemModel();
         }
 
         private bool addNewTaskCommandCanExecute()
         {
             return CanAddTask;
         }
+
     }
 }

@@ -8,6 +8,9 @@ namespace TimeWriter.Framework.TaskItem
 {
     public interface ITaskItemManager
     {
+        EventHandler<TaskItemModel> TaskItemAdded { get; set; }
+        EventHandler<TaskItemModel> TaskItemDeleted { get; set; }
+
         public List<TaskItemModel> AllTask { get; set; }
 
         void AddTaskItem(TaskItemModel taskItemModel);

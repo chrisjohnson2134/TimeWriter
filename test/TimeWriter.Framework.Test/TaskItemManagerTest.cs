@@ -20,8 +20,18 @@ namespace TimeWriter.Framework.Test
         public void TaskCanBeRemovedGivenATaskItemModel()
         {
             var testObject = CreateTaskItemManagaer();
+            bool eventCorrect = false;
+            var removeTaskItem = _completeTask[0];
 
-            testObject.RemoveTaskItem(_completeTask[0]);
+            testObject.TaskItemDeleted += (object? sender, TaskItemModel e) =>
+            {
+                if (e == removeTaskItem)
+                    eventCorrect = true;
+            };
+
+            testObject.RemoveTaskItem(removeTaskItem);
+
+            Assert.IsTrue(eventCorrect);
             Assert.IsFalse(testObject.AllTask.Any(t => t.Name == _completeTask[0].Name));
         }
 
@@ -29,11 +39,21 @@ namespace TimeWriter.Framework.Test
         public void TaskCanBeAdded()
         {
             var testObject = CreateTaskItemManagaer();
+            bool eventCorrect = false;
 
             var addTaskItem = _fixture.Create<TaskItemModel>();
+
+            testObject.TaskItemAdded += (object? sender, TaskItemModel e) =>
+            {
+                if (e == addTaskItem)
+                    eventCorrect = true;
+            };
+
             testObject.AddTaskItem(addTaskItem);
 
+            Assert.IsTrue(eventCorrect);
             Assert.IsTrue(testObject.AllTask.Contains(addTaskItem));
+
         }
 
         [Test]
