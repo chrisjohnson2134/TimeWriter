@@ -23,7 +23,7 @@ namespace TimeWriter.Controls.Time
             get => _outputTimeTemplate;
             set => SetProperty(ref _outputTimeTemplate, value);
         }
-
+         
         public List<TaskItemModel> UserSelectedItems
         {
             get => _selectedItems;

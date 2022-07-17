@@ -20,7 +20,7 @@
                 <Time:TimeWriter/>
             </TabItem>
             <TabItem Header="Add/Edit Task">
-                <TaskItem:TaskAdder/>
+                <TaskItem:TaskControl/>
             </TabItem>
         </TabControl>
     </DockPanel>

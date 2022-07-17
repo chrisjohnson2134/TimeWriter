@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeWriter.Framework.DataRepos;
 
 namespace TimeWriter.Framework.TaskItem
 {
     public class TaskItemManager : ITaskItemManager
     {
-        public List<TaskItemModel> AllTask { get; set; }
+        private ITaskItemRepo _taskItemRepo;
 
-        public TaskItemManager()
+        public TaskItemManager(ITaskItemRepo taskItemRepo)
         {
+            _taskItemRepo = taskItemRepo;
             AllTask = new List<TaskItemModel>();
-            AddTaskItem(new TaskItemModel() { Name = "T - 123 Find all things",IsCompleted = false});
-            AddTaskItem(new TaskItemModel() { Name = "T - 321 Find new things", IsCompleted = false});
-            AddTaskItem(new TaskItemModel() { Name = "D - Small Name Change", IsCompleted = false});
-            AddTaskItem(new TaskItemModel() { Name = "New Task 2",IsCompleted = true});
+            LoadAll();
         }
+
+        public List<TaskItemModel> AllTask { get; set; }
 
         public void AddTaskItem(TaskItemModel taskItemModel)
         {
@@ -26,7 +27,21 @@ namespace TimeWriter.Framework.TaskItem
 
         public void RemoveTaskItem(TaskItemModel taskItemModel)
         {
-            AllTask.RemoveAll(t => t.Name == taskItemModel.Name);
+            AllTask.Remove(taskItemModel);
+        }
+
+        public void SaveAll()
+        {
+            _taskItemRepo.SaveTaskItems(AllTask);
+        }
+
+        public void LoadAll()
+        {
+            var items = _taskItemRepo.LoadTask();
+            if (items == null)
+                return;
+
+            AllTask = items;
         }
     }
 }

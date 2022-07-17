@@ -19,7 +19,7 @@ namespace TimeWriter.Controls.TaskItem
     /// <summary>
     /// Interaction logic for TaskList.xaml
     /// </summary>
-    public partial class TaskList : UserControl
+    public partial class ReuseableTaskList : UserControl
     {
 
 
@@ -31,12 +31,12 @@ namespace TimeWriter.Controls.TaskItem
 
         // Using a DependencyProperty as the backing store for SelectedItems.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemsProperty =
-            DependencyProperty.Register("SelectedItems", typeof(List<TaskItemModel>), typeof(TaskList),
+            DependencyProperty.Register("SelectedItems", typeof(List<TaskItemModel>), typeof(ReuseableTaskList),
                 new FrameworkPropertyMetadata(null,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
-        public TaskList()
+        public ReuseableTaskList()
         {
             InitializeComponent();
         }

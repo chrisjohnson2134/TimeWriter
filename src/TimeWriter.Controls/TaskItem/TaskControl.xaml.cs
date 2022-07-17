@@ -18,9 +18,9 @@ namespace TimeWriter.Controls.TaskItem
     /// <summary>
     /// Interaction logic for TaskAdder.xaml
     /// </summary>
-    public partial class TaskAdder : UserControl
+    public partial class TaskControl : UserControl
     {
-        public TaskAdder()
+        public TaskControl()
         {
             InitializeComponent();
         }

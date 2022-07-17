@@ -6,46 +6,56 @@ using TimeWriter.Framework.TaskItem;
 
 namespace TimeWriter.Framework.Test
 {
-    public class TaskItemManagerTest
+    public class TaskItemManagerTest : TaskItemManagerTestContext
     {
-        ITaskItemManager _taskItemManager;
-        List<TaskItemModel> _completeTaskItemModel;
-        List<TaskItemModel> _inProgressTask;
-
-        Fixture _fixture;
-
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void ItemsAreLoadedFromDatabaseOnClassInitialization()
         {
-            _fixture = new Fixture();
-
-            _taskItemManager = new TaskItemManager();
-
-            _completeTaskItemModel = _fixture.Create<List<TaskItemModel>>();
-            _completeTaskItemModel.ForEach(t => { t.IsCompleted = true; _taskItemManager.AddTaskItem(t); });
-
-            _inProgressTask = _fixture.Create<List<TaskItemModel>>();
-            _inProgressTask.RemoveAt(0);
-            _inProgressTask.ForEach(t => { t.IsCompleted = false; _taskItemManager.AddTaskItem(t); });
-
+            var testObject = CreateTaskItemManagaer();
+            Assert.IsTrue(_completeTask.All(t => testObject.AllTask.Contains(t)));
+            Assert.IsTrue(_inProgressTask.All(t => testObject.AllTask.Contains(t)));
         }
 
         [Test]
-        public void GetTheListOfCompleteAndUncompleteItems()
+        public void TaskCanBeRemovedGivenATaskItemModel()
         {
-            Assert.AreEqual(_completeTaskItemModel.Count, _taskItemManager.TasksCompleted.Count);
+            var testObject = CreateTaskItemManagaer();
 
-            Assert.AreEqual(_inProgressTask.Count, _taskItemManager.TasksInProgress.Count);
-
-            Assert.AreEqual(_completeTaskItemModel.Count + _inProgressTask.Count,
-                _taskItemManager.AllTask.Count);
+            testObject.RemoveTaskItem(_completeTask[0]);
+            Assert.IsFalse(testObject.AllTask.Any(t => t.Name == _completeTask[0].Name));
         }
 
         [Test]
-        public void RemoveTaskByName()
+        public void TaskCanBeAdded()
         {
-            _taskItemManager.RemoveTaskItem(_completeTaskItemModel[0]);
-            Assert.IsFalse(_taskItemManager.AllTask.Any(t => t.Name == _completeTaskItemModel[0].Name));
+            var testObject = CreateTaskItemManagaer();
+
+            var addTaskItem = _fixture.Create<TaskItemModel>();
+            testObject.AddTaskItem(addTaskItem);
+
+            Assert.IsTrue(testObject.AllTask.Contains(addTaskItem));
+        }
+
+        [Test]
+        public void SaveAllMethodCallsTheRepoSaveAll()
+        {
+            var testObject = CreateTaskItemManagaer();
+            testObject.SaveAll();
+
+            _taskItemRepoMock.Verify(t => t.SaveTaskItems(testObject.AllTask));
+        }
+
+        [Test]
+        public void LoadAllMethodLoadsTheCurrentFile()
+        {
+            var testObject = CreateTaskItemManagaer();
+            testObject.AllTask = new List<TaskItemModel>();
+
+            Assert.AreEqual(0, testObject.AllTask.Count);
+
+            testObject.LoadAll();
+            Assert.AreEqual(5, testObject.AllTask.Count);
+
         }
     }
 }

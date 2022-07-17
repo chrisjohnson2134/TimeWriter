@@ -12,5 +12,15 @@ namespace TimeWriter.Framework.TaskItem
 
         void AddTaskItem(TaskItemModel taskItemModel);
         void RemoveTaskItem(TaskItemModel taskItemModel);
+
+        /// <summary>
+        /// This will Overwrite the entire save file.
+        /// </summary>
+        void SaveAll();
+
+        /// <summary>
+        /// This will Overwrite all the models in the program.
+        /// </summary>
+        void LoadAll();
     }
 }

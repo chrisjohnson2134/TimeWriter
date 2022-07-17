@@ -12,14 +12,14 @@ using TimeWriter.Framework.TaskItem;
 
 namespace TimeWriter.Controls.TaskItem
 {
-    public class TaskListViewModel : BindableBase
+    public class ReuseableTaskListViewModel : BindableBase
     {
         public EventHandler<List<TaskItemModel>> taskListSelectionChanged;
         private string _searchField;
         private bool _showCompleted;
         private ITaskItemManager _taskItemManager;
 
-        public TaskListViewModel(ITaskItemManager taskItemManager)
+        public ReuseableTaskListViewModel(ITaskItemManager taskItemManager)
         {
             _taskItemManager = taskItemManager;
             _searchField = String.Empty;

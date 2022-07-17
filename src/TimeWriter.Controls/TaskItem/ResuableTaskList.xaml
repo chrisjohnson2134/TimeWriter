@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TimeWriter.Controls.TaskItem.TaskList"
+﻿<UserControl x:Class="TimeWriter.Controls.TaskItem.ReuseableTaskList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,6 +8,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500" d:Background="DarkGray">
+    
+    <!--This Control is used to Simply Filter and Select Task For Other Controls-->
     <Grid>
         <DockPanel LastChildFill="True">
             <TextBox x:Name="SearchField" Text="{Binding SearchField,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" DockPanel.Dock="Top"/>
