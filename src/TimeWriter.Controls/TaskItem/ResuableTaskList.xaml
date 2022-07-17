@@ -17,7 +17,8 @@
                 <CheckBox x:Name="ShowCompletedCB" Content="Show Completed" IsChecked="{Binding ShowCompleted}"  Margin="5,0,0,0"/>
             </StackPanel>
 
-            <ListView x:Name="TaskListView" ItemsSource="{Binding TaskItemsCollectionView}" d:ItemsSource="{d:SampleData ItemCount=3}" SelectionChanged="TaskListView_SelectionChanged">
+            <ListView x:Name="TaskListView" ItemsSource="{Binding TaskItemsCollectionView}" d:ItemsSource="{d:SampleData ItemCount=3}" SelectionChanged="TaskListView_SelectionChanged"
+                      AllowDrop="True" Drop="TaskListView_Drop">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

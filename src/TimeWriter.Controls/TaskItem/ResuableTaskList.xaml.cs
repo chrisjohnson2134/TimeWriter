@@ -47,5 +47,9 @@ namespace TimeWriter.Controls.TaskItem
 
         }
 
+        private void TaskListView_Drop(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }
