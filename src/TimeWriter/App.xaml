@@ -5,6 +5,7 @@
     xmlns:local="clr-namespace:TimeWriter"
     xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
+        <ResourceDictionary Source="Styles/Common.xaml"/>
 
     </Application.Resources>
 </prism:PrismApplication>
